@@ -1,0 +1,5 @@
+CLOSED_XML = (500, "The xml is closed; no further modifications")
+DECRYPTION_ERROR = (502, "Decryption error")
+ENCRYPTION_ERROR = (503, "Encryption error")
+UNCLOSED_XML = (501, "The xml is not closed")
+XML_PARSE_ERROR = (504, "Error parsing the xml structure")

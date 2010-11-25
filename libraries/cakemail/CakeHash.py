@@ -1,0 +1,2 @@
+class CakeHash(dict):
+	pass
