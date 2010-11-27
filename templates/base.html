@@ -1,0 +1,123 @@
+{% load util_library %}
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>{% block title %}OpenTable++{% endblock %}</title>   
+    
+    <!-- Main Stylesheets --> 
+    <link href="{{ MEDIA_URL }}css/style.css" media="screen" rel="stylesheet" type="text/css" /> 
+    <!-- <link href="{{ MEDIA_URL }}css/extensions.css" media="screen" rel="stylesheet" type="text/css" /> -->
+
+    <!-- jQuery with plugins --> 
+    <script src="{{ MEDIA_URL }}js/jquery-1.4.2.min.js" type="text/javascript"></script> <!-- Could be loaded remotely from Google CDN : <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script> --> 
+    <script src="{{ MEDIA_URL }}js/jquery.ui.core.min.js" type="text/javascript"></script> 
+    <script src="{{ MEDIA_URL }}js/jquery.ui.widget.min.js" type="text/javascript"></script> 
+    <script src="{{ MEDIA_URL }}js/jquery.ui.tabs.min.js" type="text/javascript"></script> 
+    <script src="{{ MEDIA_URL }}js/jquery.datepick.pack.js" type="text/javascript"></script> 
+    <script src="{{ MEDIA_URL }}js/jquery.datepick-en-GB.js" type="text/javascript"></script> <!--  Datepick localisations: http://keith-wood.name/datepick.html --> 
+    <script src="{{ MEDIA_URL }}js/jquery.imgpreview.js" type="text/javascript"></script> 
+    <script src="{{ MEDIA_URL }}js/jquery.cycle.pack.js" type="text/javascript"></script> 
+</head> 
+ 
+<body> 
+    
+<div class="container container_12"> 
+    <!-- Header -->
+    <div class="grid_12"> 
+        <!-- Logo container --> 
+        <div id="logo">
+            <h1><a href='{% url index %}'>OpenTable++</a></h1>
+        </div> 
+        
+        <!-- Aside menu --> 
+        <div id="topmenu" class="tr"> 
+        </div> 
+        <!-- End of Aside menu --> 
+        
+        <!-- Main navigation --> 
+        <div class="radius" id="navigation"> 
+            <ul id="nav"> 
+                <li class="{% active request '^/$' %}"><a href="{% url index %}" title="Home">Home</a></li> 
+                <li class="separator">&nbsp;</li>
+                <li class="{% active request '^/reservation/(\d/)*$' %}"><a title="Reservations" href="{% url reservation %}">Create a Reservation</a></li>
+                <li class="separator">&nbsp;</li>
+                <li class="{% active request '^/restaurants/$' %}"><a title="Restaurants" href="{% url restaurants %}">Restaurants</a></li>
+                <li class="separator">&nbsp;</li>
+                <li class=""><a title="My Bookings" href="#">My Reservations</a></li>
+                <li class="separator">&nbsp;</li>
+                <li class=""><a title="Reviews" href="#">Reviews</a></li>
+            </ul><!-- /#nav --> 
+        </div> 
+        <!-- End of Main navigation --> 
+        
+    </div> 
+    <!-- End of Header --> 
+    {% block content %} 
+    <!-- Top destinations --> 
+    <div class='grid_4'> 
+        <div class="box radius fixheight"> 
+            <div class="padded"> 
+                <h2 class="headline radius"><b>Popular</b> Restaurants</h2> 
+                <div id="top-destination-panel" class="radius"> 
+                            <ul class="list"> 
+                            {% for restaurant in restaurants %}
+                                <li><span class="fr"><span class="price"><a href='{% url reservation restaurant.id %}'>reserve</a></span></span><a href="#">{{ restaurant.name }}</a></li>
+                            {% endfor %}
+                            </ul> 
+                    <div class="fr tr"> 
+                        <a href="#">All restaurants &raquo;</a> 
+                    </div> 
+                    <div class="clear">&nbsp;</div> 
+                </div> 
+            </div> 
+        </div> 
+    </div> 
+    <!-- End of Top destinations --> 
+    
+    <!-- Google map --> 
+    <div class="grid_8"> 
+        <div class="box radius padded"> 
+            <h2 class="gray radius">Restaurants by Location</h2> 
+            <div id="map_canvas" style="height:400px;"></div> 
+        </div> 
+    </div> 
+    <!-- End of Google map --> 
+    
+    <div class="grid_12">&nbsp;</div> 
+    
+ 
+    <p>&nbsp;</p> 
+{% endblock %} 
+<div class='clear'></div>
+{% block sub-footer %}
+<!-- Subfooter --> 
+<div id="subfooter"> 
+    <div class="container_12 padded"> 
+        <div class='grid_12'> 
+            <h5>Reasons for choosing us</h5> 
+        </div> 
+        <div class='grid_3'><b>Low rates</b><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div> 
+        <div class='grid_3'><b>Maximum choice</b><br />Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div> 
+        <div class='grid_3'><b>Satisfied guests</b><br />Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</div> 
+        <div class='grid_3'><b>We speak your language</b><br />Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div> 
+        <div class="clear">&nbsp;</div> 
+    </div> 
+</div> 
+<!-- End of Subfooter --> 
+{% endblock %}
+
+{% block footer %} 
+<!-- Footer --> 
+<div id="footer"> 
+    <div class="container_12 padded"> 
+        <div class="grid_3"> 
+            <p class="small">Copyright &copy; 2010 <b>OpenTable++</b><br />All rights reserved.</p> 
+        </div> 
+        <div class="clear">&nbsp;</div> 
+    </div> 
+</div> 
+<!-- End of Footer --> 
+{% endblock %}
+ 
+</body> 
+</html>
