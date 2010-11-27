@@ -26,8 +26,11 @@
                             <!-- article -->
                             <tr>
                                 <td valign="top">
-                                    This is a reminder that you have a reservation at {{ restaurant }} on {{ date }}.<br /><br />
-If you're looking for something to do afterwards, here are some movies playing at {{ theatre_name }}.<br /><br />
+                                    This is a reminder that you have a reservation at <b>{{ restaurant }}</b> on <b>{{ date }}</b>.<br /><br />
+If you're looking for something to do afterwards, here are some movies playing at: <br>
+<b>{{ theatre_name }}<br>
+{{ theatre_address }} </b>
+<br /><br />
 {{ movies }} <br /><br />
 Thanks for using Ceviche.
                                 </td>
