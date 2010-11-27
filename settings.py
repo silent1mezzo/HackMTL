@@ -135,6 +135,9 @@ DEBUG_TOOLBAR_CONFIG = {
     'HIDE_DJANGO_SQL': False,
 }
 
+CAKEMAIL_USER_KEY = '77458d7952539b9b1ebe9431f3e4b5a0'
+GOOGLE_MAPS_ID = 'ABQIAAAAVjNv9nnj6F_E2Mdsu4auQBT2yXp_ZAY8_ufC3CFXhHIE1NvwkxQino-4q66ekRwGs_UOqMGLCZW5Qw'
+
 # Place settings you want overridden for local development
 # in localsettings.py file in your projects root.
 try:
