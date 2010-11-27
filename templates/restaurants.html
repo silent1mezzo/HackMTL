@@ -3,4 +3,36 @@
 {% block title %}{{ block.super }} | Restaurants{% endblock %}
 
 {% block content %}
+    <div class='grid_6'>
+        <div class="box radius">
+            <div class="padded">
+                <h2 class="headline radius"><strong>Restaurants</strong> {% for restaurant in restaurants|slice:":10" %}{% if forloop.first  %}{{ restaurant.name|first }} - {% endif %}{% if forloop.last  %}{{restaurant.name|first}}{% endif %}{% endfor %}</h2>
+                <div id="top-destination-panel" class="radius">
+                            <ul class="list">
+                            {% for restaurant in restaurants|slice:":10" %}
+                                {% ifchanged restaurant.name|first %}<li><span class="price"><strong>{{ restaurant.name|first }}</strong></span></li>{% endifchanged %}
+                                <li><span class="fr"><span class="price"><a href='{% url reservation restaurant.id %}'>reserve</a></span></span><a href="#">{{ restaurant.name }}</a></li>
+                            {% endfor %}
+                            </ul>
+                    <div class="clear">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='grid_6'>
+        <div class="box radius">
+            <div class="padded">
+                <h2 class="headline radius"><strong>Restaurants</strong> {% for restaurant in restaurants|slice:"10:20" %}{% if forloop.first  %}{{ restaurant.name|first }} - {% endif %}{% if forloop.last  %}{{restaurant.name|first}}{% endif %}{% endfor %}</h2>
+                <div id="top-destination-panel" class="radius">
+                            <ul class="list">
+                            {% for restaurant in restaurants|slice:"10:20" %}
+                                {% ifchanged restaurant.name|first %}<li><span class="price"><strong>{{ restaurant.name|first }}</strong></span></li>{% endifchanged %}
+                                <li><span class="fr"><span class="price"><a href='{% url reservation restaurant.id %}'>reserve</a></span></span><a href="#">{{ restaurant.name }}</a></li>
+                            {% endfor %}
+                            </ul>
+                    <div class="clear">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

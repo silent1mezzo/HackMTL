@@ -40,6 +40,11 @@ class Restaurant(Facility):
                 minDiff = diff
                 closestTheatre = theatre
         return closestTheatre.name
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('restaurant', (), {'restaurant_id': self.id})
+
     def __unicode__(self):
         return self.name
 

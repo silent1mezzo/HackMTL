@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ block.super }} | {{ restaurant.name }}{% endblock %}
+
+{% block content %}
+    <div class='grid_12'>
+        <div class="box radius">
+            <div class="padded">
+                <h2 class="headline radius"><strong>{{ restaurant.name }}</strong></h2>
+                <div id="top-destination-panel" class="radius">
+                    Restaurant Info
+                    <div class="clear">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

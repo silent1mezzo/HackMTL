@@ -61,11 +61,11 @@
                 <div id="top-destination-panel" class="radius"> 
                             <ul class="list"> 
                             {% for restaurant in restaurants %}
-                                <li><span class="fr"><span class="price"><a href='{% url reservation restaurant.id %}'>reserve</a></span></span><a href="#">{{ restaurant.name }}</a></li>
+                                <li><span class="fr"><span class="price"><a href='{% url reservation restaurant.id %}'>reserve</a></span></span><a href="{% url restaurant restaurant.id %}">{{ restaurant.name }}</a></li>
                             {% endfor %}
                             </ul> 
                     <div class="fr tr"> 
-                        <a href="#">All restaurants &raquo;</a> 
+                        <a href="{% url restaurants %}">All restaurants &raquo;</a> 
                     </div> 
                     <div class="clear">&nbsp;</div> 
                 </div> 
@@ -118,6 +118,31 @@
 </div> 
 <!-- End of Footer --> 
 {% endblock %}
- 
+<script type="text/javascript" src="http://maps.google.com/maps?file=api&v=2.x&key={{ MAPS_ID }}"></script> 
+<script type="text/javascript">
+    $(document).ready(function(){ 
+        var map = new GMap2(document.getElementById('map_canvas')); 
+        var center = new GLatLng({{ restaurants.0.lat }} , {{ restaurants.0.lon }}); 
+        map.setCenter(center, 15); 
+
+        var bounds = map.getBounds(); 
+        var markers = []; 
+        var i = 0;
+        {% for restaurant in restaurants %}
+            i++;
+            var point = new GLatLng({{ restaurant.lat }}, {{ restaurant.lon }});
+            marker = new GMarker(point);
+            map.addOverlay(marker);
+            markers[i] = marker;
+            GEvent.addListener(marker, "click", function() {
+                window.location='{{ restaurant.get_absolute_url }}';
+            });
+        {% endfor %}
+        map.addControl(new GSmallMapControl());
+
+
+
+});
+</script>
 </body> 
 </html>
