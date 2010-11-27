@@ -42,8 +42,8 @@ class CinetiAPI(object):
         limit of 3 to prevent decision paralysis? or more? dunno
         """ 
 
-        if len(startTime) == 5:
-            startTime = "%s:00" % startTime
+        if len(start_time) == 5:
+            start_time = "%s:00" % startTime
 
         # for the purposes of this we'll assume we're using json
         results = self.get_movies_at_theater(theater_url)
@@ -52,7 +52,7 @@ class CinetiAPI(object):
         recommended = []
         for movie in movies.get('movies', []):
             for time in movie['times']:
-                if time >= startTime:
+                if time >= start_time:
                     movie['closestTime'] = time
                     recommended.append(movie)
                     break
