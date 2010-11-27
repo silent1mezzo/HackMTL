@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Kreni! - 403</title>
+	<meta name = "Keywords" content = "kreni, sajtovi, direktorijum, linkovi, portal, pocetna strana, bookmark, naslovi, web, pretraga, rss, srbija, crna gora, hrvatska, bosna, hercegovina, bih"/>
+	<meta name = "robots" content = "index, follow" />
+	<meta name = "revisit-after" content = "1 hours" />
+	<meta name = "author" content = "Kreni! - http://www.kreni.com/" />
+	<meta name = "generator" content = "kreni.com" />
+	<meta name = "copyright" content = "Votuzo d.o.o." />
+
+	<base href = "http://www.kreni.com/" />
+
+	<link rel="stylesheet" href="css/kreni.css" type="text/css" media="screen, projection"/>
+
+	<link rel = "shortcut icon" type = "image/png" href = "img/favicons/kreni.png"/>
+
+</head>
+
+<body>
+	<div class="container">
+		<div id="logo" class="span-5">
+			<a href="http://www.kreni.com/"><img src="img/logo-kreni-www.png" width="175" height="55" alt="" /></a>
+		</div> 
+		<div class="clear">&nbsp;</div>
+		<div class="clear">&nbsp;</div>
+				<div class="span-24">
+			<h1>Error... 403</h1>
+		</div>		
+				
+		<div class="span-24">&nbsp;</div>
+				
+		<div id="footer" class="span-24">
+			<div id="fline" class="span-24 last">&nbsp;</div>
+			
+			<div class="span-24">
+				&copy; 2008 <b>Votuzo d.o.o.</b> | <a href="contact">Kontakt</a> | <a href="http://www.kreni.com/">Uvodna</a>
+			</div>
+			
+		</div>
+	</div>
+	 
+</body>
+</html>

@@ -1,0 +1,118 @@
+/*---------------------------------------------------------------------
+
+Template Name: 	Online Booking
+Version:	 	1.0
+Release Date: 	August 08, 2010
+
+File:       	extensions.css
+Updated:    	2010-08-08
+
+Copyright (c) 2010 Zoran Juric - http://themeforest.net/user/zoranjuric
+
+-----------------------------------------------------------------------
+
+Extensions to the CSS specifications that are proprietary to browsers:
+
+-moz- 		Mozilla Foundation (Gecko-based browsers)
+-o- 		Opera Software
+-webkit- 	Safari (and other WebKit-based browsers)
+-khtml- 	Konqueror browser
+
+---------------------------------------------------------------------*/
+
+pre {
+	white-space: -moz-pre-wrap;
+}
+
+input:focus, textarea:focus, select:focus {
+	-webkit-focus-ring-color: none;
+}
+
+.btn:hover, .btn:focus, .btn:active {
+	-khtml-opacity: .9;
+	-moz-opacity: .9;
+	text-shadow: 0px 1px 0px rgba(0,0,0,0.2);
+}
+
+a#totop {
+	-khtml-opacity: .5;
+	-moz-opacity: .5;
+}
+
+.container {
+	-moz-box-shadow:0 0 8px #999;
+	-webkit-box-shadow:0 0 8px #999;
+}
+
+h2.headline {
+	-moz-box-shadow:0 2px 0 #62BA37;
+	-webkit-box-shadow:0 2px 0 #62BA37;
+}
+h2.gray {
+	-moz-box-shadow:0 2px 0 #ddd;
+	-webkit-box-shadow:0 2px 0 #ddd;
+}
+
+.radius {
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+}
+.radius-left {
+	-moz-border-radius: 8px 0 0 8px;
+	-webkit-border-top-left-radius: 8px;
+	-webkit-border-bottom-left-radius: 8px;
+}
+.radius-right {
+	-moz-border-radius: 0 8px 8px 0;
+	-webkit-border-top-right-radius: 8px;
+	-webkit-border-bottom-right-radius: 8px;
+}
+
+#nav > li:first-child:hover {
+	-moz-border-radius: 8px 0 0 8px;
+	-webkit-border-top-left-radius: 8px;
+	-webkit-border-bottom-left-radius: 8px;
+}
+
+.current_page_item {
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+}
+
+#nav .dropdown_submenu{
+	-moz-box-shadow:2px 2px 2px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow:2px 2px 2px rgba(0, 0, 0, 0.3);
+	box-shadow:2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+#imgPreviewWithStyles {
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+}
+
+div.progress, div.progress span {
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+.datepick button {
+    -moz-border-radius: 0.25em;
+    -webkit-border-radius: 0.25em;
+}
+
+.notice-item {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+
+.carousel h4 a {
+	-moz-opacity: 0.7;
+	-khtml-opacity: 0.7;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+.carousel a:hover { 
+	-moz-opacity: 1;
+	-khtml-opacity: 1;
+}
