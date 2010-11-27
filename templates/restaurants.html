@@ -11,7 +11,7 @@
                             <ul class="list">
                             {% for restaurant in restaurants|slice:":10" %}
                                 {% ifchanged restaurant.name|first %}<li><span class="price"><strong>{{ restaurant.name|first }}</strong></span></li>{% endifchanged %}
-                                <li><span class="fr"><span class="price"><a href='{% url reservation restaurant.id %}'>reserve</a></span></span><a href="#">{{ restaurant.name }}</a></li>
+                                <li><span class="fr"><span class="price"><a href='{% url reservation restaurant.id %}'>reserve</a></span></span><a href="{{ restaurant.get_absolute_url }}">{{ restaurant.name }}</a></li>
                             {% endfor %}
                             </ul>
                     <div class="clear">&nbsp;</div>
@@ -27,7 +27,7 @@
                             <ul class="list">
                             {% for restaurant in restaurants|slice:"10:20" %}
                                 {% ifchanged restaurant.name|first %}<li><span class="price"><strong>{{ restaurant.name|first }}</strong></span></li>{% endifchanged %}
-                                <li><span class="fr"><span class="price"><a href='{% url reservation restaurant.id %}'>reserve</a></span></span><a href="#">{{ restaurant.name }}</a></li>
+                                <li><span class="fr"><span class="price"><a href='{% url reservation restaurant.id %}'>reserve</a></span></span><a href="{{ restaurant.get_absolute_url }}">{{ restaurant.name }}</a></li>
                             {% endfor %}
                             </ul>
                     <div class="clear">&nbsp;</div>
