@@ -36,7 +36,7 @@ class CinetiAPI(object):
         url = "%s.%s" % (theater_url, self.format)
         return self._perform_request(url)
 
-    def get_recommended_movies_at_theater(self, theater_url, startTime="00:00:00", limit=3):
+    def get_recommended_movies_at_theater(self, theater_url, start_time="00:00:00", limit=3):
         """ 
         given a start time (24hr clock), and theatre, this will return a subset of movie recommendations 
         limit of 3 to prevent decision paralysis? or more? dunno
