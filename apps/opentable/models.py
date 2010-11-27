@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from libraries.geocode.geocode import *
 import settings
+from libraries.cineti import *
 
 class Facility(models.Model):
     name = models.CharField(_('Name'), max_length=255)
@@ -17,9 +18,11 @@ class Facility(models.Model):
         abstract = True
 
 class Theatre(Facility):
-    href = models.CharField(max_length=255, blank=True, null=True)
-    def get_recommended_movies(self):
-        pass
+    href = models.URLField(max_length=255, blank=True, null=True, verify_exists=False)
+    def get_recommended_movies(self, start_time, limit):
+        cineti = CinetiAPI()
+        return cineti.get_recommended_movies_at_theater(self.href, start_time=start_time, limit=limit)
+
     def __unicode__(self):
         return self.name
     
