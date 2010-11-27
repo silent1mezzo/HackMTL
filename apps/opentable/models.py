@@ -4,7 +4,12 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from libraries.geocode.geocode import *
 import settings
-from libraries.cineti import *
+from libraries.cineti.cineti import *
+from libraries.cakemail import CakeRelay
+import json
+
+# this should be outside of the model but whatever
+EMAIL_TEMPLATE = (u"""Hello""")
 
 class Facility(models.Model):
     name = models.CharField(_('Name'), max_length=255)
@@ -20,8 +25,16 @@ class Facility(models.Model):
 class Theatre(Facility):
     href = models.URLField(max_length=255, blank=True, null=True, verify_exists=False)
     def get_recommended_movies(self, start_time, limit):
+        # returns a list of (movie_name, start_time) 
         cineti = CinetiAPI()
-        return cineti.get_recommended_movies_at_theater(self.href, start_time=start_time, limit=limit)
+        resp = cineti.get_recommended_movies_at_theater(self.href, start_time=start_time, limit=limit)
+        movieList= []
+        if resp: 
+            movies = json.loads(resp)
+            for movie in movies:
+                movieList.append((movie['title'], movie['closestTime']))
+
+        return movieList
 
     def __unicode__(self):
         return self.name
@@ -58,5 +71,19 @@ class Reservation(models.Model):
     reminder_time = models.DateTimeField(_('Notification Period'))
     notified = models.BooleanField(default=False)
 
+    def notify_user(self):
+        
+        # to define:
+        params = {
+            'user_key': settings.CAKEMAIL_USER_KEY,
+            'email': self.user.email,
+            'html_message': EMAIL_TEMPLATE,
+            'subject': 'Your reservation at %s for: %s' % (self.restaurant.name, self.reservation_time.strftime("%H:%m")),
+            'sender_name': 'Ceviche Notifier',
+            'sender_email': 'admin@ceviche.com',
+        }
+        CakeRelay.Send(params)
+        self.notified = True
+        self.save()
     def __unicode__(self):
         return self.name
