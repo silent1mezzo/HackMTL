@@ -2,6 +2,7 @@ from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from libraries.geocode.geocode import *
 import settings
 
 class Facility(models.Model):
@@ -16,13 +17,25 @@ class Facility(models.Model):
         abstract = True
 
 class Theatre(Facility):
+    def get_recommended_movies(self):
+        pass
     def __unicode__(self):
         return self.name
-
+    
 class Restaurant(Facility):
     capacity = models.IntegerField() 
     num_reservations = models.IntegerField(default=0)
 
+    def get_closest_theatre(self):
+        geo = Geocode()
+        closestThreatre = None
+        minDiff = None
+        for theatre in Theatre.objects.all():
+            diff = geo.calculate_distance(self.lat, self.lon, theatre.lat, theatre.lon)
+            if not minDiff or diff < minDiff:
+                minDiff = diff
+                closestTheatre = theatre
+        return closestTheatre.name
     def __unicode__(self):
         return self.name
 
