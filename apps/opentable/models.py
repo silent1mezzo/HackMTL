@@ -17,6 +17,7 @@ class Facility(models.Model):
         abstract = True
 
 class Theatre(Facility):
+    href = models.CharField(max_length=255, blank=True, null=True)
     def get_recommended_movies(self):
         pass
     def __unicode__(self):
