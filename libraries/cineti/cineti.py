@@ -43,7 +43,7 @@ class CinetiAPI(object):
         """ 
 
         if len(start_time) == 5:
-            start_time = "%s:00" % startTime
+            start_time = "%s:00" % start_time
 
         # for the purposes of this we'll assume we're using json
         results = self.get_movies_at_theater(theater_url)
