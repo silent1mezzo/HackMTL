@@ -3,4 +3,31 @@
 {% block title %}{{ block.super }} | Reservations{% endblock %}
 
 {% block content %}
+    <div class='grid_8'>
+        <div class="box radius fixheight">
+            <div class="padded">
+                <h2 class="headline radius"><b>Reservation</b> {% if restaurant %}for {{ restaurant.name }}{% endif %}</h2>
+                <div id="top-destination-panel" class="radius">
+                    {% if form %}
+                        {% if restaurant %}
+                            <form action="{% url reservation restaurant.id %}" method="post">
+                        {% else %}
+                            <form action="{% url reservation %}" method="post">
+                        {% endif %}
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input type="submit" name='save' class='btn' value="Create Reservation">
+                                <input type="submit" name='cancel' value="Cancel">
+                            </form>
+                    {% endif %}
+                    {% if msg %}
+                        {{ msg }}<br />
+                        Would you like to <a href='{% url reservation %}'>create another reservation</a>?<br />
+                        Go to the <a href='{% url index %}'>main page</a>
+                    {% endif %}
+                    <div class="clear">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

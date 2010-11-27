@@ -9,7 +9,7 @@ class Facility(models.Model):
     name = models.CharField(_('Name'), max_length=255)
     address = models.TextField()
     postal_code = models.CharField(_('Postal Code'), max_length=7)
-    phone_number = models.CharField(_('Phone Number'), max_length=15)
+    phone_number = models.CharField(_('Phone Number'), max_length=15, blank=True, null=True)
     lat = models.DecimalField(max_digits=9, decimal_places=6)
     lon = models.DecimalField(max_digits=9, decimal_places=6)
     
