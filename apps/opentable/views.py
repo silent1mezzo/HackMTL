@@ -40,7 +40,7 @@ def reservation(request, restaurant_id=None):
             restaurant.lat = str(reservation.restaurant.lat)
             restaurant.lon = str(reservation.restaurant.lon)
             if restaurant.capacity - reservation.num_people < 0:
-                form._errors['num_people'] = ErrorList([u"Unfortunately this restaurant doesn't like you and can't accomodate you.  Actually, they just are busy.  Try another time..."])
+                form._errors['num_people'] = ErrorList([u"Unfortunately this restaurant doesn't like you and can't accomodate you.  Actually, they are just busy.  Try another time..."])
                 dict['form'] = form
                 if dict.get('restaurant'):
                     dict['form'].fields['restaurant'].widget = forms.HiddenInput()
