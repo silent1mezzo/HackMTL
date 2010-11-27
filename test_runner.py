@@ -15,7 +15,14 @@ def grabRestaurantList(what="", where="H5A 1E4", uid=1, maxDistance=25.0):
         print '%s. %s %s %s %s' % (count, r['name'], r['address']['street'], r['address']['city'], r['address']['pcode'])
         count+=1
 
-        restaurant = Restaurant(capacity=100, num_reservations=0, name=r['name'], address=r['address']['street'], postal_code=r['address']['pcode'])
+        restaurant = Restaurant(capacity=100, 
+                                num_reservations=0, 
+                                name=r['name'], 
+                                address=r['address']['street'], 
+                                postal_code=r['address']['pcode'],
+                                lat = Decimal(r['geoCode']['latitude']),
+                                lon = Decimal(r['geoCode']['longitude']), 
+                                )
         restaurant.save()
 
     # insert code to insert into db.
