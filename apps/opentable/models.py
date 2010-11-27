@@ -86,4 +86,5 @@ class Reservation(models.Model):
         self.notified = True
         self.save()
     def __unicode__(self):
-        return self.name
+        return '%s-%s' % (self.user.last_name, self.reservation_time)
+
