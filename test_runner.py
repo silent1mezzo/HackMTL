@@ -3,6 +3,8 @@ import json
 from libraries.yellowapi.settings import *
 from libraries.geocode.geocode import *
 from decimal import *
+
+from opentable.models import *
 ypAPI = YellowExtendedAPI(api_key=api_key)
 
 def grabRestaurantList(what="", where="H5A 1E4", uid=1, maxDistance=25.0):
@@ -12,6 +14,9 @@ def grabRestaurantList(what="", where="H5A 1E4", uid=1, maxDistance=25.0):
     for r in restaurants:
         print '%s. %s %s %s %s' % (count, r['name'], r['address']['street'], r['address']['city'], r['address']['pcode'])
         count+=1
+
+        restaurant = Restaurant(capacity=100, num_reservations=0, name=r['name'], address=r['address']['street'], postal_code=r['address']['pcode'])
+        restaurant.save()
 
     # insert code to insert into db.
     return restaurants
@@ -67,9 +72,9 @@ def grabClosestTheatre(lat1, lon1, theatres):
     print '%s is closest.' % theatre['name']                    
 
 if __name__ == "__main__":
-    theatres = ["AMC Forum 22", "Banque Scotia", "Cinema Beaubien", "Cinema du Parc", "Quartier Latin"]
-    theatreList = grabTheatresList(theatres=theatres)
+    #theatres = ["AMC Forum 22", "Banque Scotia", "Cinema Beaubien", "Cinema du Parc", "Quartier Latin"]
+    #theatreList = grabTheatresList(theatres=theatres)
     restaurants = grabRestaurantList()
-    print theatreList
-    distances = grabDistances(restaurants, theatreList)
+    #print theatreList
+    #distances = grabDistances(restaurants, theatreList)
     
