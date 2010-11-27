@@ -7,7 +7,7 @@ import settings
 from libraries.cineti.cineti import *
 from libraries.cakemail import CakeRelay
 from django.template.loader import render_to_string
-from django.template import Context
+from django.template import Context, Template
 import json
 
 
@@ -75,8 +75,14 @@ class Reservation(models.Model):
         theatre = self.restaurant.get_closest_theatre() 
         movies = theatre.get_recommended_movies(start_time = (self.reservation_time + timedelta(hours=1.5)).strftime("%H:%s"), limit=3)
         movieText = u"" 
+        counter = 1
+        movie_stuff = {}
         for movie in movies: 
-            movieText += "%s @ %s <br />" % (movie[0], movie[1])
+            movie_stuff['movie_name%s' % counter] = movie[0]
+            movie_stuff['movie_time%s' % counter] = movie[1] 
+            counter += 1
+        template = Template('{{ movie_name1}} @ {{ movie_time1 }}<br />{{ movie_name2}} @ {{ movie_time2 }}<br />{{ movie_name3}} @ {{ movie_time3 }}<br />')
+        movieText = template.render(Context(movie_stuff))
 
         dict = Context({
                     'name': self.user.first_name,
