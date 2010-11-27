@@ -6,7 +6,7 @@ from libraries.geocode.geocode import *
 import settings
 from libraries.cineti.cineti import *
 from libraries.cakemail import CakeRelay
-from django.template.loader import get_template
+from django.template.loader import render_to_string
 from django.template import Context
 import json
 
@@ -74,10 +74,9 @@ class Reservation(models.Model):
     def notify_user(self):
         theatre = self.restaurant.get_closest_theatre() 
         movies = theatre.get_recommended_movies(start_time = (self.reservation_time + timedelta(hours=1.5)).strftime("%H:%s"), limit=3)
-        template = get_template('email_template.html') 
-        movieText = "" 
+        movieText = u"" 
         for movie in movies: 
-            movieText += movieText + "%s @ %s <br />" % (movie[0], movie[1])
+            movieText += "%s @ %s <br />" % (movie[0], movie[1])
 
         dict = Context({
                     'name': self.user.first_name,
@@ -90,7 +89,7 @@ class Reservation(models.Model):
         params = {
             'user_key': settings.CAKEMAIL_USER_KEY,
             'email': self.user.email,
-            'html_message': template.render(dict),
+            'html_message': render_to_string('email_template.html', dict),
             'subject': 'Your reservation at %s for: %s' % (self.restaurant.name, self.reservation_time.strftime("%A %B %d %Y at %H:%m")),
             'sender_name': 'Ceviche Notifier',
             'sender_email': 'admin@ceviche.com',
