@@ -1,20 +1,10 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from libraries.geocode.geocode import *
 import settings
-from libraries.cineti.cineti import *
-from libraries.cakemail import CakeRelay
-import json
-
-# this should be outside of the model but whatever
-EMAIL_TEMPLATE = unicode("""Hello %(name)s,<br>
-This is a reminder that you have a reservation at %(restaurant)s on %(date)s.<br>
-If you're looking for something to do afterwards, here are some movies playing at %(theatre_name)s.<br>
-%(movies)<br>
-Thanks for using Ceviche. 
-                """)
+from libraries.cineti import *
 
 class Facility(models.Model):
     name = models.CharField(_('Name'), max_length=255)
@@ -30,16 +20,8 @@ class Facility(models.Model):
 class Theatre(Facility):
     href = models.URLField(max_length=255, blank=True, null=True, verify_exists=False)
     def get_recommended_movies(self, start_time, limit):
-        # returns a list of (movie_name, start_time) 
         cineti = CinetiAPI()
-        resp = cineti.get_recommended_movies_at_theater(self.href, start_time=start_time, limit=limit)
-        movieList= []
-        if resp: 
-            movies = json.loads(resp)
-            for movie in movies:
-                movieList.append((movie['title'], movie['closestTime']))
-
-        return movieList
+        return cineti.get_recommended_movies_at_theater(self.href, start_time=start_time, limit=limit)
 
     def __unicode__(self):
         return self.name
@@ -57,7 +39,7 @@ class Restaurant(Facility):
             if not minDiff or diff < minDiff:
                 minDiff = diff
                 closestTheatre = theatre
-        return closestTheatre
+        return closestTheatre.name
 
     @models.permalink
     def get_absolute_url(self):
@@ -76,33 +58,6 @@ class Reservation(models.Model):
     reminder_time = models.DateTimeField(_('Notification Period'))
     notified = models.BooleanField(default=False)
 
-    def notify_user(self):
-        theatre = self.restaurant.get_closest_theatre() 
-        movies = theatre.get_recommended_movies(start_time = (self.reservation_time + timedelta(hours=1.5)).strftime("%H:%s"), limit=3)
-       
-        movieText = "" 
-        for movie in movies: 
-            movieText += movieText + "%s @ %s <br>" % (movie[0], movie[1])
-       
-        movieText = unicode(movieText) 
-        dict = {    'name': self.user.first_name,
-                    'restaurant': self.restaurant.name,
-                    'date': self.reservation_time.strftime("%A %B %d %Y at %H:%m"),
-                    'theatre_name': theatre.name,
-                    'movies': movieText, 
-                }
-        # to define:
-        params = {
-            'user_key': settings.CAKEMAIL_USER_KEY,
-            'email': self.user.email,
-            'html_message': unicode(EMAIL_TEMPLATE % (dict)),
-            'subject': 'Your reservation at %s for: %s' % (self.restaurant.name, self.reservation_time.strftime("%A %B %d %Y at %H:%m")),
-            'sender_name': 'Ceviche Notifier',
-            'sender_email': 'admin@ceviche.com',
-        }
-        CakeRelay.Send(params)
-        self.notified = True
-        self.save()
     def __unicode__(self):
         return '%s-%s' % (self.user.last_name, self.reservation_time)
 
