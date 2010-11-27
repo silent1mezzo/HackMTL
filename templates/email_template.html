@@ -1,5 +1,52 @@
-Hello {{ name }},<br /><br />
-This is a reminder that you have a reservation at {{ restaurant }} on {{ date }}.<br /><br />
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+</style>
+</head>
+<body style="background-image: url('{{ MEDIA_URL }}img/email/bg.gif'); background-color: #fafafa;" marginheight="0" topmargin="0" marginwidth="0" bgcolor="#fafafa" leftmargin="0">
+<table cellspacing="0" border="0" style="background-image: url('{{ MEDIA_URL }}img/email/bg.gif'); background-color: #fafafa;" cellpadding="0" width="100%">
+    <tr>
+        <td valign="top">
+            <!-- main table -->
+            <table cellspacing="0" border="0" align="center" cellpadding="0" width="675">
+                <!-- content -->
+                <tr>
+                    <td valign="top">
+                       <repeater>
+                        <table cellspacing="0" border="0" align="center" cellpadding="0" width="670">
+                            <!-- article title -->
+                            <tr>
+                                <td class="article-title" height="30" valign="middle"> 
+                                <h2>Hello {{ name }},</h2>
+                                </td>
+                            </tr>
+                            <!-- / article title -->
+                            <!-- article -->
+                            <tr>
+                                <td valign="top">
+                                    This is a reminder that you have a reservation at {{ restaurant }} on {{ date }}.<br /><br />
 If you're looking for something to do afterwards, here are some movies playing at {{ theatre_name }}.<br /><br />
 {{ movies }} <br /><br />
 Thanks for using Ceviche.
+                                </td>
+                            </tr>
+                            <!-- / article -->
+                            <!-- article title -->
+                            <tr>
+                                <td valign="top">&nbsp;</td>
+                            </tr>
+                        </table>
+                        </repeater>
+                        
+                    </td>
+                </tr>
+                <!-- / content -->
+            </table>
+            <!-- / main table -->
+        </td>
+    </tr>
+</table>
+</body>
+</html>
