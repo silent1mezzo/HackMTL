@@ -781,7 +781,7 @@ span.label {
     Message boxes
 */
 
-.note, .info, .info, .alert, .alert, .tip, .success {
+.note, .info, .info, .alert, .alert, .tip, .success, .errorlist {
     margin:10px 0;
     padding:8px 10px 8px 40px;
 }
@@ -799,10 +799,13 @@ span.label {
     border-top:1px solid #D4D9DE;
 }
 
-.alert {
+.alert, .errorlist {
     background:url("../img/boxes/alert.png") no-repeat scroll 8px 5px #FFE6DF;
-    border-bottom:1px solid #FFD9CF;
-    border-top:1px solid #FFD9CF;
+    border:1px solid #FFD9CF;
+}
+
+.errorlist li {
+    list-style-type:none;
 }
 
 .tip {
