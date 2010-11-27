@@ -3,4 +3,18 @@
 {% block title %}{{ block.super }} | Reservations{% endblock %}
 
 {% block content %}
+    <div class='grid_8'>
+        <div class="box radius fixheight">
+            <div class="padded">
+                <h2 class="headline radius"><b>Reservation</b> {% if restaurant %}for {{ restaurant.name }}{% endif %}</h2>
+                <div id="top-destination-panel" class="radius">
+                        <form>
+                            {{ form.as_p }}
+                            <submit>
+                        </form>
+                    <div class="clear">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
